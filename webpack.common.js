@@ -1,5 +1,6 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+// const CopyPlugin = require('copy-webpack-plugin');
 
 // We need Nodes fs module to read directory contents
 const fs = require("fs");
@@ -31,7 +32,11 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "assets/js/app.[contentHash].js"
   },
-  plugins: [].concat(htmlPlugins),
+  plugins: [
+    // new CopyPlugin([
+    //   { from: './src/assets/fonts', to: 'assets/fonts' },
+    // ]),
+  ].concat(htmlPlugins),
   module: {
     rules: [
       {
