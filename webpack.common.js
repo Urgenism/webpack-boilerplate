@@ -1,7 +1,5 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode = process.env.NODE_ENV !== "production";
 
 // We need Nodes fs module to read directory contents
 const fs = require("fs");
@@ -32,33 +30,10 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename:  devMode ? "assets/js/app.js" : "assets/js/app.[contentHash].js"
+    filename: "assets/js/app.[contentHash].js"
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: devMode ? "assets/css/app.css" : "assets/css/app.[hash].css"
-    })
-  ].concat(htmlPlugins),
+  plugins: [].concat(htmlPlugins),
   module: {
-    rules: [
-      {
-        test: /\.scss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1
-            }
-          },
-          {
-            loader: "postcss-loader"
-          },
-          {
-            loader: "sass-loader"
-          }
-        ]
-      }
-    ]
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
   }
 };
