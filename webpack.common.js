@@ -15,7 +15,6 @@ function generateHtmlPlugins(templateDir) {
     const extension = parts[1];
     // Create new HTMLWebpackPlugin with options
     return new HTMLWebpackPlugin({
-      title: `${name}`,
       filename: `${name}.html`,
       template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`)
     });
@@ -34,6 +33,26 @@ module.exports = {
   },
   plugins: [].concat(htmlPlugins),
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.(html)$/,
+        use: [ "html-loader" ]
+      },
+      {
+        test: /\.(svg|png|jpe?g|gif)$/i,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "assets/imgs"
+          }
+        }
+      }
+    ]
   }
 };
