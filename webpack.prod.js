@@ -1,13 +1,14 @@
-const merge = require("webpack-merge");
-const common = require("./webpack.common.js");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const merge = require('webpack-merge');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "assets/css/app.[hash].css"
+      filename: 'assets/css/app.[hash].css'
     }),
     new CleanWebpackPlugin()
   ],
@@ -18,16 +19,16 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 1
             }
           },
           {
-            loader: "postcss-loader"
+            loader: 'postcss-loader'
           },
           {
-            loader: "sass-loader"
+            loader: 'sass-loader'
           }
         ]
       }

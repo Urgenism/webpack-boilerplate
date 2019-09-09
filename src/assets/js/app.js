@@ -1,2 +1,4 @@
+const one = 1;
+const two = 2;
 
-console.log("I am app.js");
+console.log(one + two);

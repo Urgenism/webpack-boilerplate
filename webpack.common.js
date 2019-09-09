@@ -1,9 +1,9 @@
-const path = require("path");
-const HTMLWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 // const CopyPlugin = require('copy-webpack-plugin');
 
 // We need Nodes fs module to read directory contents
-const fs = require("fs");
+const fs = require('fs');
 
 // Our function that generates our html plugins
 function generateHtmlPlugins(templateDir) {
@@ -11,7 +11,7 @@ function generateHtmlPlugins(templateDir) {
   const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
   return templateFiles.map(item => {
     // Split names and extension
-    const parts = item.split(".");
+    const parts = item.split('.');
     const name = parts[0];
     const extension = parts[1];
     // Create new HTMLWebpackPlugin with options
@@ -23,14 +23,14 @@ function generateHtmlPlugins(templateDir) {
 }
 
 // Call our function on our views directory.
-const htmlPlugins = generateHtmlPlugins("./src/templates");
+const htmlPlugins = generateHtmlPlugins('./src/templates');
 
 // main webpack exports
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "assets/js/app.[contentHash].js"
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'assets/js/app.[contentHash].js'
   },
   plugins: [
     // new CopyPlugin([
@@ -42,19 +42,19 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: ['babel-loader', 'eslint-loader']
       },
       {
         test: /\.(html)$/,
-        use: [ "html-loader" ]
+        use: ['html-loader']
       },
       {
         test: /\.(svg|png|jpe?g|gif)$/i,
         use: {
-          loader: "file-loader",
+          loader: 'file-loader',
           options: {
-            name: "[name].[ext]",
-            outputPath: "assets/imgs"
+            name: '[name].[ext]',
+            outputPath: 'assets/imgs'
           }
         }
       }

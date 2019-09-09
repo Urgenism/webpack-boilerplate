@@ -1,0 +1,20 @@
+{
+    "extends": ["airbnb", "prettier"],
+    "parser": "babel-eslint",
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "no-unused-vars": ["warn", {
+            "vars": "local",
+            "args": "none"
+        }],
+        "no-console": "off",
+        "func-names": "off",
+        "class-methods-use-this": "off",
+        "import/no-extraneous-dependencies": ["error", {
+            "devDependencies": true,
+            "optionalDependencies": false,
+            "peerDependencies": false
+        }]
+    }
+}
